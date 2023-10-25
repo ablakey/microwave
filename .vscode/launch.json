@@ -1,0 +1,16 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+      {
+        "type": "chrome",
+        "request": "attach",
+        "name": "Launch Chrome against localhost",
+        "port": 9222,
+        "url": "http://localhost:1234",
+        "webRoot": "${workspaceFolder}",
+        "sourceMapPathOverrides": {
+          "/__parcel_source_root/*": "${webRoot}/*"
+        }
+      }
+    ]
+  }

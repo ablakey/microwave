@@ -1,0 +1,60 @@
+{
+  "name": "RENAME_ME",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "parcel ./src/index.html",
+    "build": "parcel build --public-url ./ --no-source-maps"
+  },
+  "author": "Andrew Blakey",
+  "license": "MIT",
+  "prettier": {
+    "printWidth": 100
+  },
+  "eslintConfig": {
+    "parser": "@typescript-eslint/parser",
+    "plugins": [
+      "@typescript-eslint"
+    ],
+    "extends": [
+      "plugin:@typescript-eslint/recommended",
+      "plugin:react/recommended",
+      "prettier"
+    ],
+    "settings": {
+      "react": {
+        "version": "detect"
+      }
+    },
+    "rules": {
+      "@typescript-eslint/no-empty-function": "off",
+      "@typescript-eslint/explicit-function-return-type": "off",
+      "@typescript-eslint/explicit-module-boundary-types": "off",
+      "@typescript-eslint/no-non-null-assertion": "off",
+      "@typescript-eslint/no-explicit-any": "off",
+      "@typescript-eslint/no-angle-bracket-type-assertion": "off",
+      "@typescript-eslint/prefer-interface": "off",
+      "react/jsx-uses-react": "off",
+      "react/react-in-jsx-scope": "off",
+      "react/prop-types": "off",
+      "react/display-name": "off"
+    }
+  },
+  "devDependencies": {
+    "@types/react-dom": "^18.2.6",
+    "@typescript-eslint/eslint-plugin": "^5.60.1",
+    "@typescript-eslint/parser": "^5.60.1",
+    "eslint": "^8.43.0",
+    "eslint-config-prettier": "^8.8.0",
+    "parcel": "^2.9.3",
+    "prettier": "^2.8.8",
+    "process": "^0.11.10",
+    "typescript": "^5.1.6"
+  },
+  "dependencies": {
+    "antd": "^5.6.3",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0"
+  }
+}
