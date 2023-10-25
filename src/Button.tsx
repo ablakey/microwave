@@ -25,6 +25,8 @@ export function Button(props: { label: string; type: ButtonType }) {
         color: "white",
         fontSize: "18px",
         ...buttonTypeStyles[props.type],
+        overflowWrap: "break-word",
+        textAlign: "center",
       }}
     >
       {props.label}
