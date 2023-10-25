@@ -42,18 +42,17 @@
     }
   },
   "devDependencies": {
-    "@types/react-dom": "^18.2.6",
-    "@typescript-eslint/eslint-plugin": "^5.60.1",
-    "@typescript-eslint/parser": "^5.60.1",
-    "eslint": "^8.43.0",
-    "eslint-config-prettier": "^8.8.0",
-    "parcel": "^2.9.3",
-    "prettier": "^2.8.8",
+    "@types/react-dom": "^18.2.14",
+    "@typescript-eslint/eslint-plugin": "^6.9.0",
+    "@typescript-eslint/parser": "^6.9.0",
+    "eslint": "^8.52.0",
+    "eslint-config-prettier": "^9.0.0",
+    "parcel": "^2.10.1",
+    "prettier": "^3.0.3",
     "process": "^0.11.10",
-    "typescript": "^5.1.6"
+    "typescript": "^5.2.2"
   },
   "dependencies": {
-    "antd": "^5.6.3",
     "react": "^18.2.0",
     "react-dom": "^18.2.0"
   }
