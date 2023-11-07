@@ -11,7 +11,7 @@
 
 .parent {
   min-height: 100vh;
-  background-color: dimgray;
+  background-color: rgb(24, 24, 24);
   position: relative;
 }
 
@@ -29,9 +29,8 @@
 
 .microwave {
   display: grid;
-  height: calc(100% - 16px);
+  height: 100%;
   grid-template-rows: 1fr 4fr;
-  margin: 8px;
   background-color: black;
   container-type: inline-size;
 }
@@ -51,7 +50,7 @@
     justify-content: center;
     align-items: center;
     container-type: inline-size;
-    background-color: #3c412c;
+    background-color: #1f2217;
 
     .segments {
       container-type: inline-size;
@@ -65,11 +64,11 @@
         font-family: dseg;
         font-size: 10dvh;
         z-index: 1;
-        color: rgb(0, 255, 0);
+        color: rgb(0, 180, 0);
 
         &.ghost {
           z-index: 0;
-          color: rgb(34, 42, 35);
+          color: #272b1d;
         }
       }
     }
