@@ -1,16 +1,16 @@
 * {
   margin: 0;
   box-sizing: border-box;
+  font-family: sans-serif;
 }
 
-#parent {
-  /* This can be just any element with responsive W/H */
+.parent {
   min-height: 100vh;
   background-color: dimgray;
   position: relative;
 }
 
-#frame {
+.frame {
   position: absolute;
   margin: auto;
   left: 0;
@@ -20,4 +20,55 @@
   max-width: 100%;
   max-height: 100%;
   aspect-ratio: 1 / 2;
+}
+
+.microwave {
+  display: grid;
+  height: calc(100% - 16px);
+  grid-template-rows: 1fr 4fr;
+  margin: 8px;
+  background-color: black;
+}
+
+.buttonpad {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: repeat(8, 1fr);
+  margin: 5%;
+  gap: 1% 5%;
+  container-type: inline-size;
+}
+
+.button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 12px;
+  color: white;
+  text-align: center;
+  container-type: inline-size;
+
+  span {
+    font-size: 20cqi;
+  }
+
+  &.white {
+    border: 1px solid white;
+  }
+
+  &.black {
+    border: 1px solid dimgrey;
+  }
+
+  &.number {
+    background-color: #333;
+    margin: 0 15% 0 15%;
+
+    span {
+      font-size: 30cqi;
+    }
+  }
+
+  &.startstop {
+  }
 }
