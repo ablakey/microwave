@@ -43,13 +43,14 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  border-radius: 12px;
+  border-radius: 4cqw;
   color: white;
   text-align: center;
   container-type: inline-size;
+  padding: 1cqw;
 
   span {
-    font-size: 20cqi;
+    font-size: 20cqw;
   }
 
   &.white {
@@ -62,10 +63,10 @@
 
   &.number {
     background-color: #333;
-    margin: 0 15% 0 15%;
+    margin: 0 4cqw 0 4cqw;
 
     span {
-      font-size: 30cqi;
+      font-size: 40cqi;
     }
   }
 
