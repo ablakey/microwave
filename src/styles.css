@@ -54,11 +54,11 @@
   }
 
   &.white {
-    border: 1px solid white;
+    border: 0.75cqw solid white;
   }
 
   &.black {
-    border: 1px solid dimgrey;
+    border: 0.75cqw solid dimgrey;
   }
 
   &.number {
