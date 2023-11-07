@@ -1,3 +1,8 @@
+@font-face {
+  font-family: dseg;
+  src: url(DSEG7Classic-BoldItalic.woff2);
+}
+
 * {
   margin: 0;
   box-sizing: border-box;
@@ -28,14 +33,55 @@
   grid-template-rows: 1fr 4fr;
   margin: 8px;
   background-color: black;
+  container-type: inline-size;
+}
+
+.display {
+  container-type: inline-size;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 4dvh;
+
+  .lcd {
+    border-radius: 1dvh;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    container-type: inline-size;
+    background-color: rgb(23, 23, 23);
+
+    .segments {
+      container-type: inline-size;
+      width: 100%;
+      height: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      span {
+        position: absolute;
+        font-family: dseg;
+        font-size: 10dvh;
+        z-index: 1;
+        color: rgb(0, 227, 0);
+
+        &.ghost {
+          z-index: 0;
+          color: rgb(53, 53, 53);
+        }
+      }
+    }
+  }
 }
 
 .buttonpad {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   grid-template-rows: repeat(8, 1fr);
-  margin: 5%;
-  gap: 1% 5%;
+  margin: 2dvh;
+  gap: 1dvh 2dvh;
   container-type: inline-size;
 }
 
@@ -54,11 +100,11 @@
   }
 
   &.white {
-    border: 0.75cqw solid white;
+    border: 0.5cqw solid white;
   }
 
   &.black {
-    border: 0.75cqw solid dimgrey;
+    border: 0.5cqw solid dimgrey;
   }
 
   &.number {
