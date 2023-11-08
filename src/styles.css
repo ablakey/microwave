@@ -40,7 +40,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  margin: 4dvh;
+  margin: 2dvh 4dvh;
 
   .lcd {
     border-radius: 1dvh;
@@ -62,7 +62,7 @@
       span {
         position: absolute;
         font-family: dseg;
-        font-size: 10dvh;
+        font-size: 12dvh;
         z-index: 1;
         color: rgb(0, 180, 0);
 
@@ -89,17 +89,21 @@
   align-items: center;
   justify-content: center;
   border-radius: 4cqw;
-  color: white;
   text-align: center;
   container-type: inline-size;
   padding: 1cqw;
 
   span {
+    color: rgb(152, 152, 152);
     font-size: 20cqw;
+
+    &.special {
+      color: white;
+    }
   }
 
   &.white {
-    border: 0.5cqw solid white;
+    border: 0.5cqw solid rgb(226, 226, 226);
   }
 
   &.black {
