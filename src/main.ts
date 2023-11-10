@@ -1,8 +1,4 @@
-import beep from "url:./assets/beep.mp3";
-import { Howl, Howler } from "howler";
-
-console.log(beep);
-let context: AudioContext | undefined = undefined;
+import { Speaker } from "./Speaker";
 
 /**
  * Order matters as it defines what each button is, in HTML layout order when querying all buttons.
@@ -36,12 +32,12 @@ const buttons = [
 
 type ButtonName = (typeof buttons)[number];
 const audioCtx = new AudioContext();
+
+const speaker = new Speaker();
+
 function main() {
   function press(button: ButtonName) {
-    const sound = new Howl({
-      src: beep,
-    });
-    sound.play();
+    speaker.beep();
   }
 
   const x = document.querySelectorAll<HTMLDivElement>(".button");
