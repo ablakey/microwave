@@ -31,12 +31,12 @@ const buttons = [
 ] as const;
 
 type ButtonName = (typeof buttons)[number];
-const audioCtx = new AudioContext();
 
 const speaker = new Speaker();
 
 function main() {
   function press(button: ButtonName) {
+    console.log(button);
     speaker.beep();
   }
 

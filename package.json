@@ -19,14 +19,8 @@
     ],
     "extends": [
       "plugin:@typescript-eslint/recommended",
-      "plugin:react/recommended",
       "prettier"
     ],
-    "settings": {
-      "react": {
-        "version": "detect"
-      }
-    },
     "rules": {
       "@typescript-eslint/no-empty-function": "off",
       "@typescript-eslint/explicit-function-return-type": "off",
@@ -34,11 +28,7 @@
       "@typescript-eslint/no-non-null-assertion": "off",
       "@typescript-eslint/no-explicit-any": "off",
       "@typescript-eslint/no-angle-bracket-type-assertion": "off",
-      "@typescript-eslint/prefer-interface": "off",
-      "react/jsx-uses-react": "off",
-      "react/react-in-jsx-scope": "off",
-      "react/prop-types": "off",
-      "react/display-name": "off"
+      "@typescript-eslint/prefer-interface": "off"
     }
   },
   "devDependencies": {
