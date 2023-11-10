@@ -1,6 +1,7 @@
+/* data-url causes Parcel to inline the resource so that it loads with CSS, preventing the temporary display of an incomplete page. */
 @font-face {
   font-family: dseg;
-  src: url(assets/DSEG7Classic-Regular.woff2);
+  src: url(data-url:assets/DSEG7Classic-Regular.woff2);
 }
 
 * {
@@ -40,7 +41,7 @@ html {
   z-index: 3;
   width: 100%;
   height: 100%;
-  background-image: url(assets/green-dust-and-scratches.png);
+  background-image: url(data-url:assets/green-dust-and-scratches.png);
   opacity: 0.2;
   background-size: contain;
   pointer-events: none;
@@ -53,17 +54,6 @@ html {
   z-index: 2;
   width: 100%;
   height: 100%;
-}
-
-.print {
-  position: absolute;
-  z-index: 2;
-  width: 100px;
-  height: 100px;
-  background-image: url(assets/print.png);
-  left: 30;
-  background-size: contain;
-  opacity: 0.3;
 }
 
 .microwave {
