@@ -1,4 +1,4 @@
-import { Speaker } from "./Speaker";
+import { Speaker } from "./machine/Speaker";
 
 /**
  * Order matters as it defines what each button is, in HTML layout order when querying all buttons.

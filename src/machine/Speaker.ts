@@ -1,5 +1,5 @@
 import { Howl } from "howler";
-import beepFile from "url:./assets/beep.mp3";
+import beepFile from "url:../assets/beep.mp3";
 
 export class Speaker {
   private beepSnd: Howl;
