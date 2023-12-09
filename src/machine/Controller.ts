@@ -3,13 +3,15 @@ import { Display } from "./Display";
 import { Input } from "./Input";
 import { Sound } from "./Sound";
 
-type State = "Idle" | "SetPower" | "SetTime" | "Stopped" | "Running";
+type State = "Idle" | "SetPower" | "SetTime" | "Stopped" | "Running" | "Test";
 
 export class Controller {
-  state: State = "Idle";
   clock: Time = new Time(12, 0);
-  lastSecond = 0;
+  powerLevel = 9;
   timeLeft: Time = new Time(0, 0);
+
+  state: State = "Idle";
+  lastSecond = 0;
 
   display: Display;
   sound: Sound;
@@ -24,13 +26,37 @@ export class Controller {
 
   public handlePress(button: ButtonName) {
     switch (button) {
+      case "test":
+        this.doTest();
+        break;
+      case "power":
+        this.doPower();
+        break;
       case "cook":
         this.doCook();
         break;
+      case "start":
+        this.doStart();
+        break;
+      case "stop":
+        this.doStop();
+        break;
+      case "0":
+      case "1":
+      case "2":
+      case "3":
+      case "4":
+      case "5":
+      case "6":
+      case "7":
+      case "8":
+      case "9":
+        this.doNumber(parseInt(button));
+        break;
       default:
+        console.log(`NOT HANDLED: ${button}`);
         break;
     }
-    console.log(button);
   }
 
   tick() {
@@ -51,10 +77,15 @@ export class Controller {
       case "Idle":
         this.display.set(this.clock);
         break;
+      case "SetPower":
+        this.display.setText(`P! !${this.powerLevel}`);
+        break;
       case "Running":
       case "SetTime":
       case "Stopped":
         this.display.set(this.timeLeft);
+        break;
+      case "Test":
         break;
       default:
         this.display.set(this.clock);
@@ -66,7 +97,7 @@ export class Controller {
       this.timeLeft.decrement();
     }
 
-    if (this.state === "Idle") {
+    if (this.state === "SetTime") {
       this.display.showColon = !this.display.showColon;
     }
 
@@ -74,18 +105,67 @@ export class Controller {
     this.setClock();
   }
 
-  private setClock() {
+  setClock() {
     const date = new Date();
     const hh = date.getHours();
     this.clock.big = hh > 12 ? hh - 12 : hh;
     this.clock.small = date.getMinutes();
   }
 
+  setState(state: State) {
+    console.log(`Set State: ${state}`);
+    this.state = state;
+  }
+
+  doTest() {
+    this.setState("Test");
+    this.display.setText("do ne");
+  }
+
+  doPower() {
+    if (this.state === "Idle") {
+      this.setState("SetPower");
+    }
+  }
   doCook() {
     if (this.state !== "Idle") {
       return;
     }
 
-    this.state = "SetTime";
+    this.setState("SetTime");
+  }
+
+  doNumber(num: number) {
+    // if power level, just replace it.
+
+    if (this.state === "SetPower") {
+      this.powerLevel = num;
+    }
+
+    // If big number is 10 or more, there's no more room to add numbers.
+    if (this.state === "SetTime" && this.timeLeft.big < 10) {
+      this.timeLeft.shift(num);
+    }
+  }
+
+  doStart() {
+    if (this.state === "SetPower") {
+      this.setState("Idle");
+    }
+
+    if (this.state === "SetTime") {
+      this.setState("Running");
+    }
+  }
+
+  doStop() {
+    if (this.state === "Idle") {
+      this.powerLevel = 9;
+    }
+
+    if (this.state === "SetPower") {
+      this.powerLevel = 9;
+      this.setState("Idle");
+    }
   }
 }

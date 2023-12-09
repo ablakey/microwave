@@ -4,7 +4,7 @@
 export const BUTTONS = [
   "about",
   "defrost",
-  "bomb",
+  "test",
   "power",
   "cook",
   "timer",

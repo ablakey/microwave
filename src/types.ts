@@ -15,6 +15,15 @@ export class Time {
     this.small = small;
   }
 
+  public shift(num: number) {
+    const newTimeStr = `${this.big.toString().padStart(2, "0")[1]}${this.small
+      .toString()
+      .padStart(2, "0")}${num.toString()}`;
+
+    this.big = parseInt(newTimeStr.substring(0, 2));
+    this.small = parseInt(newTimeStr.substring(2, 4));
+  }
+
   public decrement() {
     if (this.equals(Time.Zero)) {
       return;
