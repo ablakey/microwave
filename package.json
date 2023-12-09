@@ -45,6 +45,7 @@
     "typescript": "^5.2.2"
   },
   "dependencies": {
-    "howler": "^2.2.4"
+    "howler": "^2.2.4",
+    "ts-essentials": "^9.4.1"
   }
 }

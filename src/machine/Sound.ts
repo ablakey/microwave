@@ -1,7 +1,7 @@
 import { Howl } from "howler";
 import beepFile from "url:../assets/beep.mp3";
 
-export class Speaker {
+export class Sound {
   private beepSnd: Howl;
 
   constructor() {
