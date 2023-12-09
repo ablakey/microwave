@@ -3,7 +3,8 @@ import { assert } from "ts-essentials";
 export class Display {
   private el: HTMLSpanElement;
   private current: Time = new Time(0, 0);
-  private showingColon = false;
+  private currentString = "";
+  public showColon = true;
 
   constructor() {
     const el = document.querySelector<HTMLSpanElement>(".segments .green");
@@ -13,22 +14,19 @@ export class Display {
   }
 
   set(time: Time) {
-    if (this.current.equals(time)) {
-      return;
-    }
     this.current = time;
     this.render();
   }
 
-  tick() {
-    this.showingColon = !this.showingColon;
-    this.render();
-  }
-
   private render() {
-    const mm = this.current.big.toString().padStart(2, "!");
-    const ss = this.current.small.toString().padStart(2, "0");
-    const displayString = `${mm}${this.showingColon ? ":" : " "}${ss}`;
-    this.el.innerText = displayString;
+    const big = this.current.big.toString().padStart(2, "!");
+    const small = this.current.small.toString().padStart(2, "0");
+    const colon = this.showColon ? ":" : " ";
+    const displayString = `${big}${colon}${small}`;
+
+    if (displayString !== this.currentString) {
+      this.currentString = displayString;
+      this.el.innerText = this.currentString;
+    }
   }
 }

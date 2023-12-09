@@ -5,12 +5,27 @@ import { BUTTONS } from "./config";
 export type ButtonName = (typeof BUTTONS)[number];
 
 export class Time {
-  readonly big: number;
-  readonly small: number;
+  big: number;
+  small: number;
+
+  public static Zero = new Time(0, 0);
 
   constructor(big: number, small: number) {
     this.big = big;
     this.small = small;
+  }
+
+  public decrement() {
+    if (this.equals(Time.Zero)) {
+      return;
+    }
+
+    if (this.small > 0) {
+      this.small -= 1;
+    } else {
+      this.big -= 1;
+      this.small = 59;
+    }
   }
 
   public equals(time: Time): boolean {

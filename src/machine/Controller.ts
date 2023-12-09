@@ -9,7 +9,7 @@ export class Controller {
   state: State = "Idle";
   clock: Time = new Time(12, 0);
   lastSecond = 0;
-  timeLeft: Time = new Time(13, 98);
+  timeLeft: Time = new Time(0, 0);
 
   display: Display;
   sound: Sound;
@@ -18,43 +18,74 @@ export class Controller {
   constructor() {
     this.display = new Display();
     this.sound = new Sound();
-    this.input = new Input(this.press);
+    this.input = new Input(this.handlePress.bind(this));
     requestAnimationFrame(this.tick.bind(this));
-
-    this.display.set(new Time(0, 0));
-    this.setClock();
   }
 
-  public press(button: ButtonName) {
+  public handlePress(button: ButtonName) {
+    switch (button) {
+      case "cook":
+        this.doCook();
+        break;
+      default:
+        break;
+    }
     console.log(button);
   }
 
-  private tick() {
-    switch (this.state) {
-      case "Idle":
-        this.display.set(this.clock);
-        break;
-      case "Running":
-      case "Stopped":
-        this.display.set(this.timeLeft);
-        break;
-      default:
-        this.display.set(new Time(88, 88));
-    }
-
+  tick() {
     requestAnimationFrame(this.tick.bind(this));
     const newSecond = new Date().getSeconds();
 
     // Tick every wall clock second.
     if (this.lastSecond !== newSecond) {
-      this.display.tick();
+      this.everySecond();
+      this.lastSecond = newSecond;
     }
-    this.lastSecond = newSecond;
+
+    this.everyTick();
+  }
+
+  everyTick() {
+    switch (this.state) {
+      case "Idle":
+        this.display.set(this.clock);
+        break;
+      case "Running":
+      case "SetTime":
+      case "Stopped":
+        this.display.set(this.timeLeft);
+        break;
+      default:
+        this.display.set(this.clock);
+    }
+  }
+
+  everySecond() {
+    if (this.state === "Running") {
+      this.timeLeft.decrement();
+    }
+
+    if (this.state === "Idle") {
+      this.display.showColon = !this.display.showColon;
+    }
+
+    // Keep wall clock up-to-date.
+    this.setClock();
   }
 
   private setClock() {
     const date = new Date();
     const hh = date.getHours();
-    this.clock = new Time(hh > 12 ? hh - 12 : hh, date.getMinutes());
+    this.clock.big = hh > 12 ? hh - 12 : hh;
+    this.clock.small = date.getMinutes();
+  }
+
+  doCook() {
+    if (this.state !== "Idle") {
+      return;
+    }
+
+    this.state = "SetTime";
   }
 }
