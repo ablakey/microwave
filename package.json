@@ -45,7 +45,6 @@
     "typescript": "^5.2.2"
   },
   "dependencies": {
-    "@regosen/gapless-5": "^1.4.5",
     "howler": "^2.2.4",
     "ts-essentials": "^9.4.1"
   }
