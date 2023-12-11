@@ -70,6 +70,8 @@ export class Controller {
     }
 
     this.everyTick();
+
+    this.sound.tick();
   }
 
   everyTick() {
@@ -120,6 +122,7 @@ export class Controller {
   doTest() {
     this.setState("Test");
     this.display.setText("do ne");
+    this.sound.play("Running");
   }
 
   doPower() {
@@ -138,6 +141,7 @@ export class Controller {
   doNumber(num: number) {
     // if power level, just replace it.
 
+    this.sound.play("Beep");
     if (this.state === "SetPower") {
       this.powerLevel = num;
     }
