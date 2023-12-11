@@ -7,15 +7,22 @@ const MicroStamps = {
   LoopStart: 1.5,
   LoopEnd: 5.0,
   End: 6,
-  CancelEnd: 7,
+  CancelStart: 5.35,
+  CancelEnd: 6.15,
   Beep: 8.55,
 };
 
 export class Sound {
   private snd: Howl;
+  private beepSnd: Howl;
   private currentSound: SoundName = "None";
 
   constructor() {
+    this.beepSnd = new Howl({
+      src: microFile,
+      volume: 3.0, // TODO: calibrat.
+    });
+
     this.snd = new Howl({
       src: microFile,
       volume: 3.0, // TODO: calibrate.
@@ -42,6 +49,12 @@ export class Sound {
     }
   }
 
+  public beep() {
+    console.log("play");
+    this.beepSnd.seek(MicroStamps.Beep);
+    this.beepSnd.play();
+  }
+
   public play(sound: SoundName) {
     this.currentSound = sound;
 
@@ -57,7 +70,7 @@ export class Sound {
         this.snd.play();
         break;
       case "Cancel":
-        this.snd.seek(MicroStamps.End);
+        this.snd.seek(MicroStamps.CancelStart);
         this.snd.play();
         break;
     }

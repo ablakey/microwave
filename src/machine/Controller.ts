@@ -3,7 +3,7 @@ import { Display } from "./Display";
 import { Input } from "./Input";
 import { Sound } from "./Sound";
 
-type State = "Idle" | "SetPower" | "SetTime" | "Stopped" | "Running" | "Test";
+type State = "Idle" | "SetPower" | "SetTime" | "Paused" | "Running" | "Test";
 
 export class Controller {
   clock: Time = new Time(12, 0);
@@ -84,7 +84,7 @@ export class Controller {
         break;
       case "Running":
       case "SetTime":
-      case "Stopped":
+      case "Paused":
         this.display.set(this.timeLeft);
         break;
       case "Test":
@@ -122,7 +122,7 @@ export class Controller {
   doTest() {
     this.setState("Test");
     this.display.setText("do ne");
-    this.sound.play("Running");
+    this.sound.play("Cancel");
   }
 
   doPower() {
@@ -157,8 +157,10 @@ export class Controller {
       this.setState("Idle");
     }
 
-    if (this.state === "SetTime") {
+    if (this.state === "SetTime" || this.state === "Paused") {
       this.setState("Running");
+      this.sound.beep();
+      this.sound.play("Running");
     }
   }
 
@@ -170,6 +172,11 @@ export class Controller {
     if (this.state === "SetPower") {
       this.powerLevel = 9;
       this.setState("Idle");
+    }
+
+    if (this.state === "Running") {
+      this.sound.play("Cancel");
+      this.setState("Paused");
     }
   }
 }
