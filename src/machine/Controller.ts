@@ -9,11 +9,11 @@ import { Sound } from "./Sound";
  */
 export const Buttons = [
   "about",
-  "defrost",
-  "todo",
+  "sound",
+  "brightness",
   "power",
   "cook",
-  "timer",
+  "addtime",
   "popcorn",
   "potato",
   "pizza",
@@ -84,6 +84,16 @@ export class Controller {
         break;
       case "about":
         this.doAbout();
+        break;
+      case "brightness":
+        this.doBrightness();
+        break;
+      case "addtime":
+        this.doAddTime();
+        break;
+      case "sound":
+        this.doToggleSound();
+        break;
       case "0":
       case "1":
       case "2":
@@ -175,6 +185,13 @@ export class Controller {
     console.log(`Set State: ${state}`);
     this.state = state;
   }
+
+  doBrightness() {
+    this.sound.beep();
+    document.querySelector("span.green")!.classList.toggle("dim");
+  }
+
+  doAddTime() {}
 
   doAbout() {
     window.open("https://github.com/ablakey/microwave", "_blank")!.focus();

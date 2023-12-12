@@ -95,8 +95,13 @@ html {
 
         &.green {
           z-index: 1;
-          color: rgb(0, 220, 0);
+          color: rgb(0, 200, 0);
           text-shadow: 1px 1px 10px rgb(0, 180, 0);
+
+          &.dim {
+            color: rgb(0, 100, 0);
+            text-shadow: 1px 1px 10px rgb(0, 80, 0);
+          }
         }
 
         &.ghost {

@@ -2,18 +2,34 @@
 
 A microwave implemented in TypeScript and CSS.
 
+
+
+## FAQ
+
+### Q: A thing isn't implemented cleanly. It's not Dry. It won't scale.
+
 This project is for *fun*.
 
-## Stuff I Learned
+### Q: How did you get the 7 Segment Display to work so nicely?
 
-- Container Queries! FINALLY a comfortable way to resize fonts based on the local parent.
-- How much I hate State Machines in TypeScript and will opt for flat conditional logic when the machine is simple enough.
-- Getting CSS glow effects just right.
-- 7 Digit Display fonts are so helpful!
+I used this font, which is absolutely amazing: https://www.keshikan.net/fonts-e.html
 
+### Q: How does the whole thing scale so elegantly?
 
-## Links
+[Container Queries!](https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_container_queries) I love them. They make it easy to scale a font based on the local parent rather than the window width.
 
-7 and 14 Segment Fonts: https://www.keshikan.net/fonts-e.html
+### Q: Why didn't you use a finite state machine? This is a classic FSM.
 
-Container Queries: https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_container_queries
+How about you implement a FSM in TypeScript for a toy project and tell me you're still having fun.
+
+But seriously, yes, if this was an actual project, that's a good idea. Given this is a very shallow machine, basic conditional logic is actually much less work, even if it's a bit repetitive.  There are no wacky side-effects or exception cases to worry about: you read a `doSomething` function and know exactly what it does.
+
+### Q: When I turn the sound off, the beeps stop, but the microwave sound also goes away. That's not realistic.
+
+That's a feature of this microwave and is why it is used and loved by millions.
+
+### Q: Any recipe suggestions?
+
+I enjoy the Pop Tarts. But be sure to check out this book:
+
+<img src="cookbook.jpg" width="350" title="Microwave Cooking for One">
