@@ -1,4 +1,4 @@
-# The Microwave.
+# The Microwave
 
 The world's most advanced free digital microwave!
 
