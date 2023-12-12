@@ -192,13 +192,18 @@ export class Controller {
   }
 
   doAddTime() {
+    if (this.isState("Idle")) {
+      this.setState("SetTime");
+    }
+
     if (this.isState("Running", "Paused", "Idle", "Done", "SetTime")) {
       this.timeLeft.add(30);
+      this.sound.beep();
     }
   }
 
   doToggleSound() {
-    console.error("TODO");
+    this.sound.toggleSound();
   }
 
   doAbout() {
@@ -267,11 +272,13 @@ export class Controller {
       this.setState("Running");
       this.sound.beep();
       this.sound.play("Running");
+      this.display.showColon = true;
     }
   }
 
   doStop() {
     this.sound.beep();
+    this.display.showColon = true;
 
     if (this.state === "Idle" || this.state === "Done") {
       this.setState("Idle"); // Clear "Done"

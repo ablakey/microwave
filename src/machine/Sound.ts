@@ -16,16 +16,15 @@ export class Sound {
   private snd: Howl;
   private beepSnd: Howl;
   private currentSound: SoundName = "None";
+  public mute = false;
 
   constructor() {
     this.beepSnd = new Howl({
       src: microFile,
-      volume: 3.0, // TODO: calibrate.
     });
 
     this.snd = new Howl({
       src: microFile,
-      volume: 3.0, // TODO: calibrate.
     });
   }
 
@@ -49,13 +48,27 @@ export class Sound {
     }
   }
 
+  public toggleSound() {
+    const newVolume = this.snd.volume() === 0 ? 1 : 0;
+    this.snd.volume(newVolume);
+    this.beepSnd.volume(newVolume);
+  }
+
   public beep() {
+    if (this.mute) {
+      return;
+    }
+
     this.beepSnd.stop();
     this.beepSnd.seek(MicroStamps.Beep);
     this.beepSnd.play();
   }
 
   public play(sound: SoundName) {
+    if (this.mute) {
+      return;
+    }
+
     this.currentSound = sound;
 
     this.snd.stop();

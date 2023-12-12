@@ -26,8 +26,10 @@ export class Time {
 
   public add(amount: number) {
     // Don't overflow.
-    if (this.big) {
+    if (this.big === 99 && this.small + amount >= 60) {
       this.big = 99;
+      this.small = Math.min(this.small + amount, 99);
+      return;
     }
 
     this.small += amount;
