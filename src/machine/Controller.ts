@@ -207,7 +207,7 @@ export class Controller {
   }
 
   doAbout() {
-    window.open("https://github.com/ablakey/microwave", "_blank")!.focus();
+    window.open("https://github.com/ablakey/microwave/blob/main/README.md", "_blank")!.focus();
   }
 
   doPower() {
