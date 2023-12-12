@@ -1,9 +1,49 @@
+import { assert } from "ts-essentials";
 import { ButtonName, Time } from "../types";
 import { Display } from "./Display";
 import { Input } from "./Input";
 import { Sound } from "./Sound";
 
-type State = "Idle" | "SetPower" | "SetTime" | "Paused" | "Running" | "Test";
+/**
+ * Order matters as it defines what each button is, in HTML layout order when querying all Buttons.
+ */
+export const Buttons = [
+  "about",
+  "defrost",
+  "todo",
+  "power",
+  "cook",
+  "timer",
+  "popcorn",
+  "potato",
+  "pizza",
+  "vegetable",
+  "beverage",
+  "poptart",
+  "1",
+  "2",
+  "3",
+  "4",
+  "5",
+  "6",
+  "7",
+  "8",
+  "9",
+  "start",
+  "0",
+  "stop",
+] as const;
+
+const FoodTimes: Record<string, [number, number]> = {
+  popcorn: [2, 55],
+  potato: [3, 0],
+  pizza: [0, 30],
+  vegetable: [99, 99],
+  beverage: [0, 75],
+  poptart: [0, 3],
+};
+
+type State = "Idle" | "SetPower" | "SetTime" | "Paused" | "Running" | "Done";
 
 export class Controller {
   clock: Time = new Time(12, 0);
@@ -24,11 +64,12 @@ export class Controller {
     requestAnimationFrame(this.tick.bind(this));
   }
 
-  public handlePress(button: ButtonName) {
+  isState(...states: State[]) {
+    return states.includes(this.state);
+  }
+
+  handlePress(button: ButtonName) {
     switch (button) {
-      case "test":
-        this.doTest();
-        break;
       case "power":
         this.doPower();
         break;
@@ -41,6 +82,8 @@ export class Controller {
       case "stop":
         this.doStop();
         break;
+      case "about":
+        this.doAbout();
       case "0":
       case "1":
       case "2":
@@ -52,6 +95,14 @@ export class Controller {
       case "8":
       case "9":
         this.doNumber(parseInt(button));
+        break;
+      case "beverage":
+      case "popcorn":
+      case "poptart":
+      case "potato":
+      case "pizza":
+      case "vegetable":
+        this.doPreset(button);
         break;
       default:
         console.log(`NOT HANDLED: ${button}`);
@@ -87,7 +138,8 @@ export class Controller {
       case "Paused":
         this.display.set(this.timeLeft);
         break;
-      case "Test":
+      case "Done":
+        this.display.setText("do ne");
         break;
       default:
         this.display.set(this.clock);
@@ -95,11 +147,16 @@ export class Controller {
   }
 
   everySecond() {
-    if (this.state === "Running") {
+    if (this.isState("Running") && this.timeLeft.equals(Time.Zero)) {
+      this.setState("Done");
+      this.sound.play("End");
+    }
+
+    if (this.isState("Running")) {
       this.timeLeft.decrement();
     }
 
-    if (this.state === "SetTime") {
+    if (this.isState("SetTime")) {
       this.display.showColon = !this.display.showColon;
     }
 
@@ -119,35 +176,59 @@ export class Controller {
     this.state = state;
   }
 
-  doTest() {
-    this.setState("Test");
-    this.display.setText("do ne");
-    this.sound.play("Cancel");
+  doAbout() {
+    window.open("https://github.com/ablakey/microwave", "_blank")!.focus();
   }
 
   doPower() {
-    if (this.state === "Idle") {
+    if (this.isState("Idle", "Done")) {
       this.setState("SetPower");
     }
   }
+
   doCook() {
-    if (this.state !== "Idle") {
+    if (!this.isState("Idle", "Done")) {
       return;
     }
-
     this.setState("SetTime");
   }
 
-  doNumber(num: number) {
-    // if power level, just replace it.
+  doPreset(food: string) {
+    if (this.state !== "Idle" && this.state !== "Done") {
+      return;
+    }
 
-    this.sound.play("Beep");
+    this.sound.beep();
+    this.sound.play("Running");
+
+    const time = FoodTimes[food];
+    assert(time);
+    this.timeLeft.big = time[0];
+    this.timeLeft.small = time[1];
+    this.setState("Running");
+  }
+
+  doNumber(num: number) {
+    if (this.state === "Running" || this.state === "Paused") {
+      return;
+    }
+
+    this.sound.beep();
+
+    // Always replace power level. 1-9 (Yes 0 exists on many microwaves. It's a timer.)
     if (this.state === "SetPower") {
       this.powerLevel = num;
     }
 
-    // If big number is 10 or more, there's no more room to add numbers.
+    // Automatically begin setting time.
+    if (this.state === "Idle" || this.state === "Done") {
+      this.setState("SetTime");
+      this.timeLeft.shift(num);
+      return; // Avoid calling SetTime case.
+    }
+
     if (this.state === "SetTime" && this.timeLeft.big < 10) {
+      // If big number is 10 or more, there's no more room to add numbers.
       this.timeLeft.shift(num);
     }
   }
@@ -165,8 +246,17 @@ export class Controller {
   }
 
   doStop() {
-    if (this.state === "Idle") {
+    this.sound.beep();
+
+    if (this.state === "Idle" || this.state === "Done") {
+      this.setState("Idle"); // Clear "Done"
       this.powerLevel = 9;
+    }
+
+    if (this.state === "Paused" || this.state === "SetTime") {
+      this.setState("Idle");
+      this.timeLeft.big = 0;
+      this.timeLeft.small = 0;
     }
 
     if (this.state === "SetPower") {

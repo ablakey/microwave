@@ -6,7 +6,7 @@ const MicroStamps = {
   Start: 0,
   LoopStart: 1.5,
   LoopEnd: 5.0,
-  End: 6,
+  End: 5.35,
   CancelStart: 5.35,
   CancelEnd: 6.15,
   Beep: 8.55,
@@ -20,7 +20,7 @@ export class Sound {
   constructor() {
     this.beepSnd = new Howl({
       src: microFile,
-      volume: 3.0, // TODO: calibrat.
+      volume: 3.0, // TODO: calibrate.
     });
 
     this.snd = new Howl({
@@ -50,7 +50,7 @@ export class Sound {
   }
 
   public beep() {
-    console.log("play");
+    this.beepSnd.stop();
     this.beepSnd.seek(MicroStamps.Beep);
     this.beepSnd.play();
   }
@@ -61,10 +61,6 @@ export class Sound {
     this.snd.stop();
 
     switch (sound) {
-      case "Beep":
-        this.snd.seek(MicroStamps.Beep);
-        this.snd.play();
-        break;
       case "Running":
         this.snd.seek(MicroStamps.Start);
         this.snd.play();
@@ -73,6 +69,13 @@ export class Sound {
         this.snd.seek(MicroStamps.CancelStart);
         this.snd.play();
         break;
+      case "End":
+        this.snd.seek(MicroStamps.End);
+        this.snd.play();
+      case "None":
+        break; // Do nothing. Already stopped sound above.
+      default:
+        console.error(`Unhandled: ${sound}`);
     }
   }
 }

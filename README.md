@@ -1,35 +1,19 @@
-# microwave
+# The Microwave.
 
-https://www.keshikan.net/fonts-e.html
+A microwave implemented in TypeScript and CSS.
 
+This project is for *fun*.
 
-## CSS
+## Stuff I Learned
 
-- make print faded, not black, and put it on a few buttons, rotated slightly.
-- if I use the print, downsample it. it's a large file.
-
-
-
-## Machine
-
-- Display shows up to 4 characters
-- If showing numbers
-  - the last two are always seconds (eg. 99)
-  - if there are four numbers, replace the last one.
+- Container Queries! FINALLY a comfortable way to resize fonts based on the local parent.
+- How much I hate State Machines in TypeScript and will opt for flat conditional logic when the machine is simple enough.
+- Getting CSS glow effects just right.
+- 7 Digit Display fonts are so helpful!
 
 
-### States
+## Links
 
-- Idle
-- Power
-- Stopped
-- Running
-- SetTime
-- SetClock
+7 and 14 Segment Fonts: https://www.keshikan.net/fonts-e.html
 
-
-
-## TODO: Basic example
-
-- Set mode to SetTime
-- Input numbers
+Container Queries: https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_container_queries

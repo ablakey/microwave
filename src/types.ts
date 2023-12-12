@@ -1,8 +1,8 @@
-import { BUTTONS } from "./config";
-
 // export type Time = [number, number]; // [mm:ss]. Could be 22:99, 12:01,  0:03
 
-export type ButtonName = (typeof BUTTONS)[number];
+import { Buttons } from "./machine/Controller";
+
+export type ButtonName = (typeof Buttons)[number];
 
 export class Time {
   big: number;
