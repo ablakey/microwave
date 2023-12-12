@@ -1,5 +1,3 @@
-// export type Time = [number, number]; // [mm:ss]. Could be 22:99, 12:01,  0:03
-
 import { Buttons } from "./machine/Controller";
 
 export type ButtonName = (typeof Buttons)[number];
