@@ -1,6 +1,6 @@
 # The Microwave.
 
-The world's most advanced free digital Microwave!
+The world's most advanced free digital microwave!
 
 By: Andrew Blakey
 
