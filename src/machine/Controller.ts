@@ -191,7 +191,15 @@ export class Controller {
     document.querySelector("span.green")!.classList.toggle("dim");
   }
 
-  doAddTime() {}
+  doAddTime() {
+    if (this.isState("Running", "Paused", "Idle", "Done", "SetTime")) {
+      this.timeLeft.add(30);
+    }
+  }
+
+  doToggleSound() {
+    console.error("TODO");
+  }
 
   doAbout() {
     window.open("https://github.com/ablakey/microwave", "_blank")!.focus();

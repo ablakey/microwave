@@ -24,6 +24,20 @@ export class Time {
     this.small = parseInt(newTimeStr.substring(2, 4));
   }
 
+  public add(amount: number) {
+    // Don't overflow.
+    if (this.big) {
+      this.big = 99;
+    }
+
+    this.small += amount;
+    // Small could be like, "93 seconds".
+    while (this.small >= 60) {
+      this.small -= 60;
+      this.big += 1;
+    }
+  }
+
   public decrement() {
     if (this.equals(Time.Zero)) {
       return;
