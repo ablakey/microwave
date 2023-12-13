@@ -16,6 +16,11 @@
 /* Prevent elastic scrolling on ios */
 html {
   overflow: hidden;
+  height: 100%;
+}
+
+body {
+  height: 100%;
 }
 
 .parent {
@@ -135,7 +140,7 @@ html {
   cursor: pointer;
 
   span {
-    color: 989898;
+    color: #989898;
     font-size: 20cqw;
   }
 
