@@ -49,7 +49,7 @@ export class Sound {
   }
 
   public toggleSound() {
-    const newVolume = this.snd.volume() === 0.3 ? 1 : 0.3;
+    const newVolume = this.snd.volume() === 0.2 ? 0.7 : 0.2;
     this.snd.volume(newVolume);
     this.beepSnd.volume(newVolume);
   }

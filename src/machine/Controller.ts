@@ -203,6 +203,7 @@ export class Controller {
   }
 
   doToggleSound() {
+    this.sound.beep();
     this.sound.toggleSound();
   }
 
