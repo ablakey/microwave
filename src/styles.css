@@ -16,11 +16,6 @@
 /* Prevent elastic scrolling on ios */
 html {
   overflow: hidden;
-  height: 100%;
-}
-
-body {
-  height: 100%;
 }
 
 .parent {
@@ -29,6 +24,9 @@ body {
   position: relative;
 }
 
+html,
+body,
+.parent,
 .frame {
   position: absolute;
   margin: auto;
@@ -36,6 +34,9 @@ body {
   right: 0;
   top: 0;
   bottom: 0;
+}
+
+.frame {
   max-width: 100%;
   max-height: 100%;
   aspect-ratio: 1 / 2;
