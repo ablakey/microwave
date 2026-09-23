@@ -2,7 +2,7 @@
 
 The world's most advanced free digital microwave!
 
-By: Andrew Blakey
+https://ablakey.github.io/microwave/
 
 ## FAQ
 
@@ -26,7 +26,7 @@ I enjoy the Pop Tarts. But be sure to check out this book:
 
 ### Q: A thing isn't implemented cleanly. It's not DRY. It won't scale.
 
-This project is for *fun*.
+This project is for _fun_.
 
 ### Q: How did you get the 7 Segment Display to work so nicely?
 
@@ -40,8 +40,7 @@ I used this font, which is absolutely amazing: https://www.keshikan.net/fonts-e.
 
 How about you implement a FSM in TypeScript for a toy project and tell me you're still having fun.
 
-But seriously, yes, if this was an actual project, that's a good idea. Given this is a very shallow machine, basic conditional logic is actually much less work, even if it's a bit repetitive.  There are no wacky side-effects or exception cases to worry about: you read a `doSomething` function and know exactly what it does.
-
+But seriously, yes, if this was an actual project, that's a good idea. Given this is a very shallow machine, basic conditional logic is actually much less work, even if it's a bit repetitive. There are no wacky side-effects or exception cases to worry about: you read a `doSomething` function and know exactly what it does.
 
 ## Important Links
 
